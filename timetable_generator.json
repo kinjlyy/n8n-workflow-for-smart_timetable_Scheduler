@@ -1,0 +1,451 @@
+{
+  "name": "My workflow (Aug 31 at 08:58:49)",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU",
+          "mode": "list",
+          "cachedResultName": "smart_timetable",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "sections",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -160,
+        -16
+      ],
+      "id": "989197b1-bba0-41ff-90b6-e032fe5d1635",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZLWQMqqt0EQvoVLM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU",
+          "mode": "list",
+          "cachedResultName": "smart_timetable",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1839663514,
+          "mode": "list",
+          "cachedResultName": "Teacher List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU/edit#gid=1839663514"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -160,
+        128
+      ],
+      "id": "6dbc472d-84ca-4707-9b06-0dd77d8d5079",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZLWQMqqt0EQvoVLM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU",
+          "mode": "list",
+          "cachedResultName": "smart_timetable",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 589602707,
+          "mode": "list",
+          "cachedResultName": "Rooms ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU/edit#gid=589602707"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -160,
+        304
+      ],
+      "id": "959627bd-d1ec-4c8a-bcf7-0cf8b0f3561c",
+      "name": "Get row(s) in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZLWQMqqt0EQvoVLM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU",
+          "mode": "list",
+          "cachedResultName": "smart_timetable",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 75419711,
+          "mode": "list",
+          "cachedResultName": "Timetable Constraints",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pKBvt_lplwigTYWNm9CcnPzJhnX-4Yn9aAPvc1BLwtU/edit#gid=75419711"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -144,
+        512
+      ],
+      "id": "e0499b91-67ea-4499-951d-bbf1a290af1d",
+      "name": "Get row(s) in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZLWQMqqt0EQvoVLM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code node\n// Combine 4 sheet inputs into a single object\n\nreturn [\n  {\n    json: {\n      sections: items[0].json,      // First sheet: Sections\n      teachers: items[1].json,      // Second sheet: Teacher List\n      rooms: items[2].json,         // Third sheet: Rooms\n      constraints: items[3].json    // Fourth sheet: Timetable Constraints\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        1008
+      ],
+      "id": "c0e6b41a-d5db-4ec4-99f9-6d51e9938be4",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1z_UC47iRkvbicMAU5xlZa1SGkhqwgxzAXbqRVuroevA",
+          "mode": "list",
+          "cachedResultName": "output_timetable",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1z_UC47iRkvbicMAU5xlZa1SGkhqwgxzAXbqRVuroevA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 39429453,
+          "mode": "list",
+          "cachedResultName": "Sheet5",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1z_UC47iRkvbicMAU5xlZa1SGkhqwgxzAXbqRVuroevA/edit#gid=39429453"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "day": "={{ $json.Day }}",
+            "p1": "={{ $json.Period1 }}",
+            "p2": "={{ $json.Period2 }}",
+            "p3": "={{ $json.Period3 }}",
+            "p4": "={{ $json.Period4 }}",
+            "p5": "={{ $json.Period5 }}",
+            "p6": "={{ $json.Period6 }}",
+            "section": "={{ $json.Section }}"
+          },
+          "matchingColumns": [
+            "day"
+          ],
+          "schema": [
+            {
+              "id": "section",
+              "displayName": "section",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "day",
+              "displayName": "day",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "p1",
+              "displayName": "p1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "p2",
+              "displayName": "p2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "p3",
+              "displayName": "p3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "p4",
+              "displayName": "p4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "p5",
+              "displayName": "p5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "p6",
+              "displayName": "p6",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        544,
+        0
+      ],
+      "id": "c4e835f5-d3ef-4448-829c-53f95fa36e3b",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "07sK4CQqyiKSwPcR",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rawInput = items[0].json;\n\n// Convert stringified JSON fields into arrays/objects\nfunction parseField(f) {\n    try { return JSON.parse(f); } catch(e) { return f; }\n}\n\n// Wrap single objects in array if needed\nconst sections = Array.isArray(rawInput.sections) ? rawInput.sections : [rawInput.sections];\nconst rooms = Array.isArray(rawInput.rooms) ? rawInput.rooms : [rawInput.rooms];\nconst constraints = Array.isArray(rawInput.constraints) ? rawInput.constraints : [rawInput.constraints];\n\nreturn [{\n    json: {\n        sections: sections.map(s => ({\n            Section: s.Section,\n            Capacity: s.Capacity,\n            Subjects: parseField(s.Subjects),\n            TeachersMapping: parseField(s[\"Teachers Mapping\"]),\n            LecturesPerWeek: parseField(s[\"Lectures Per Week\"])\n        })),\n        rooms: rooms.map(r => ({\n            Section: r.Section,\n            Capacity: r.Capacity,\n            Subjects: parseField(r.Subjects),\n            TeachersMapping: parseField(r[\"Teachers Mapping\"]),\n            LecturesPerWeek: parseField(r[\"Lectures Per Week\"])\n        })),\n        constraints: constraints.map(c => ({\n            Section: c.Section,\n            Capacity: c.Capacity,\n            Subjects: parseField(c.Subjects),\n            TeachersMapping: parseField(c[\"Teachers Mapping\"]),\n            LecturesPerWeek: parseField(c[\"Lectures Per Week\"])\n        }))\n    }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        1040
+      ],
+      "id": "c2a38d1f-46d5-4aac-ae6d-9799f39f370c",
+      "name": "Code4"
+    },
+    {
+      "parameters": {
+        "jsCode": "// -------------------------------\n// 1️⃣ Define days and periods\n// -------------------------------\nconst days = [\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\"];\nconst periods_per_day = 6;\n\n// -------------------------------\n// 2️⃣ Initialize timetable and teacher schedule\n// -------------------------------\nlet timetable = {};\nlet teacher_schedule = {};\nlet lectures_to_place = [];\n\n// -------------------------------\n// 3️⃣ Process input rows\n// -------------------------------\nfor (let row of items) {\n    const r = row.json;\n    const sec = r.Section;\n\n    if (!timetable[sec]) timetable[sec] = {};\n    for (let day of days) {\n        if (!timetable[sec][day]) timetable[sec][day] = Array(periods_per_day).fill(null);\n    }\n\n    // Fill already scheduled periods\n    for (let p=1; p<=periods_per_day; p++) {\n        let val = r[`Period${p}`] || \"\";\n        if (val) {\n            timetable[sec][r.Day][p-1] = val;\n            const parts = val.split(\"\\n\");\n            if (parts.length>1) {\n                const teacher = parts[1].trim();\n                if (!teacher_schedule[teacher]) {\n                    teacher_schedule[teacher] = {};\n                    for (let d of days) teacher_schedule[teacher][d] = Array(periods_per_day).fill(false);\n                }\n                teacher_schedule[teacher][r.Day][p-1] = true;\n            }\n        }\n    }\n\n    // Parse optional constraints\n    if (r.Subjects && r[\"Teachers Mapping\"] && r[\"Lectures Per Week\"]) {\n        try {\n            const subjects = JSON.parse(r.Subjects.replace(/'/g,'\"'));\n            const teachers = JSON.parse(r[\"Teachers Mapping\"].replace(/'/g,'\"'));\n            const lectures = JSON.parse(r[\"Lectures Per Week\"].replace(/'/g,'\"'));\n\n            for (let subj of subjects) {\n                let total = lectures[subj];\n                // Count already scheduled lectures\n                let scheduled = 0;\n                for (let day of days) {\n                    for (let i=0;i<periods_per_day;i++){\n                        const val = timetable[sec][day][i];\n                        if (val && val.includes(subj)) scheduled++;\n                    }\n                }\n                let remaining = total - scheduled;\n                for (let i=0;i<remaining;i++){\n                    lectures_to_place.push({section: sec, subject: subj, teacher: teachers[subj]});\n                    if (!teacher_schedule[teachers[subj]]) {\n                        teacher_schedule[teachers[subj]] = {};\n                        for (let d of days) teacher_schedule[teachers[subj]][d] = Array(periods_per_day).fill(false);\n                    }\n                }\n            }\n        } catch(e){ console.error(\"Parsing error\", sec, e); }\n    }\n}\n\n// -------------------------------\n// 4️⃣ Schedule remaining lectures (Backtracking)\n// -------------------------------\nfunction schedule(index=0){\n    if (index >= lectures_to_place.length) return true;\n    const lec = lectures_to_place[index];\n    const sec = lec.section;\n    const teacher = lec.teacher;\n    const subject = lec.subject;\n\n    for (let day of days){\n        // Subject appears at most once per day in section\n        if (timetable[sec][day].some(p=>p && p.includes(subject))) continue;\n\n        for (let i=0;i<periods_per_day;i++){\n            if (!timetable[sec][day][i] && (!teacher_schedule[teacher][day][i])) {\n                timetable[sec][day][i] = `${subject}\\n${teacher}`;\n                teacher_schedule[teacher][day][i] = true;\n\n                if (schedule(index+1)) return true;\n\n                // Backtrack\n                timetable[sec][day][i] = null;\n                teacher_schedule[teacher][day][i] = false;\n            }\n        }\n    }\n    return false;\n}\n\nschedule();\n\n// -------------------------------\n// 5️⃣ Flatten output per section with Section only once\n// -------------------------------\nconst output = [];\n\nfor (let sec in timetable) {\n    let firstRow = true;\n    for (let day of days) {\n        output.push({\n            json: {\n                Section: firstRow ? sec : \"\",  // only first row has section\n                Day: day,\n                Period1: timetable[sec][day][0] || \"\",\n                Period2: timetable[sec][day][1] || \"\",\n                Period3: timetable[sec][day][2] || \"\",\n                Period4: timetable[sec][day][3] || \"\",\n                Period5: timetable[sec][day][4] || \"\",\n                Period6: timetable[sec][day][5] || \"\"\n            }\n        });\n        firstRow = false;\n    }\n}\n\nreturn output;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "0ee692f2-2f85-40ee-aaa9-42c62350908c",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://script.google.com/macros/s/AKfycbw-n_LwlIc3fGZPdK4vKxbIxnrYJ3o7HrW_z0RUlGcBojz__W_BRvlIRhob4qa-d7VPhw/exec",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {}
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.rows }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1248,
+        16
+      ],
+      "id": "4d51dbbb-b8f9-4ba8-8c97-c44439f0a9b3",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Keep track of the last seen section\nlet lastSection = \"\";\n\nreturn items.map(item => {\n  // If section is empty, use last seen section\n  const section = item.json.section || lastSection;\n  if (section) lastSection = section;\n\n  return {\n    json: {\n      section: section,\n      day: item.json.day || \"\",\n      p1: item.json.p1 || \"\",\n      p2: item.json.p2 || \"\",\n      p3: item.json.p3 || \"\",\n      p4: item.json.p4 || \"\",\n      p5: item.json.p5 || \"\",\n      p6: item.json.p6 || \"\"\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        848,
+        -16
+      ],
+      "id": "761e561b-38b2-4944-8de4-847e6ec0f41b",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Function Node\nreturn [\n  {\n    json: {\n      rows: $items().map(item => item.json)\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        112
+      ],
+      "id": "4bed4162-a72b-445f-8b8b-8c7a55f7c0d0",
+      "name": "Code3"
+    }
+  ],
+  "connections": {
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet3": {
+      "main": [
+        []
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        []
+      ]
+    },
+    "Get row(s) in sheet2": {
+      "main": [
+        []
+      ]
+    },
+    "Code": {
+      "main": [
+        []
+      ]
+    },
+    "Code4": {
+      "main": [
+        []
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": null,
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": null
+}
