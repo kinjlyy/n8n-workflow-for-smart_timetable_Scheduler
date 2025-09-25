@@ -6,16 +6,154 @@ Input-
 
 Connect the INPUT sheet to n8n via google sheets node
 Connect an output sheet via same proccess
+Code to be written inside AppScript of output sheet -
+
+function doPost(e) {
+  try {
+    if (!e || !e.postData) return _res(400, { error: "No postData" });
+
+    const raw = e.postData.contents || "";
+    let payload = JSON.parse(raw);
+
+    // Accept either a top-level array or { rows: [...] }
+    const rows = Array.isArray(payload) ? payload : (payload.rows || []);
+    if (!Array.isArray(rows) || rows.length === 0) return _res(400, { error: "No rows found in payload" });
+
+    const result = insertTimetable(rows);
+    return _res(200, { ok: true, ...result });
+
+  } catch (err) {
+    return _res(500, { error: String(err) });
+  }
+}
+
+function _res(code, obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj, null, 2))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/** Writes rows grouped by section → creates/clears sheets → formats nicely */
+function insertTimetable(rows) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const grouped = {};
+
+  // Group by section
+  rows.forEach(r => {
+    const sec = (r.section || "").toString().trim();
+    if (!sec) return; // skip empty section
+    if (!grouped[sec]) grouped[sec] = [];
+    grouped[sec].push(r);
+  });
+
+  const processed = [];
+
+  Object.keys(grouped).forEach(section => {
+    // Create or clear sheet
+    let sh = ss.getSheetByName(section);
+    if (!sh) sh = ss.insertSheet(section);
+    else sh.clear();
+
+    // Header + data
+    const headers = ["Day", "P1", "P2", "P3", "P4", "P5", "P6"];
+    const data = grouped[section].map(r => [
+      r.day || "—",
+      r.p1 || "—",
+      r.p2 || "—",
+      r.p3 || "—",
+      r.p4 || "—",
+      r.p5 || "—",
+      r.p6 || "—"
+    ]);
+
+    // Title row
+    const totalCols = headers.length;
+    sh.getRange(1, 1, 1, totalCols).merge().setValue(`Section ${section} — Timetable`);
+
+    // Header row
+    sh.getRange(2, 1, 1, totalCols).setValues([headers]);
+
+    // Data rows
+    if (data.length) sh.getRange(3, 1, data.length, totalCols).setValues(data);
+
+    // Formatting
+    _formatSectionSheet(sh, totalCols, data.length);
+
+    processed.push({ section, rows: data.length });
+  });
+
+  return { sections: processed.length, details: processed };
+}
+
+function _formatSectionSheet(sh, totalCols, dataRows) {
+  const lastRow = 2 + Math.max(1, dataRows);
+  const rngAll = sh.getRange(1, 1, lastRow, totalCols);
+
+  // Title row
+  sh.getRange(1, 1)
+    .setFontWeight("bold")
+    .setFontSize(14)
+    .setHorizontalAlignment("center")
+    .setBackground("#263238")
+    .setFontColor("#ffffff");
+
+  // Header row
+  sh.getRange(2, 1, 1, totalCols)
+    .setFontWeight("bold")
+    .setBackground("#4a90e2")
+    .setFontColor("#ffffff")
+    .setHorizontalAlignment("center");
+
+  // Borders
+  rngAll.setBorder(true, true, true, true, true, true);
+
+  // Column widths
+  sh.setColumnWidths(1, 1, 100);
+  sh.setColumnWidths(2, totalCols - 1, 140);
+
+  // Conditional colors for subjects
+  const subjectColors = {
+    "Maths": "#fff176",
+    "English": "#64b5f6",
+    "Science": "#81c784",
+    "Hindi": "#e57373",
+    "Sanskrit": "#ba68c8",
+    "Physics": "#4dd0e1",
+    "GK": "#ffe082"
+  };
+
+  sh.clearConditionalFormatRules();
+  const rules = [];
+
+  Object.keys(subjectColors).forEach(subj => {
+    rules.push(SpreadsheetApp.newConditionalFormatRule()
+      .whenTextContains(subj)
+      .setBackground(subjectColors[subj])
+      .setRanges([sh.getRange(3, 2, Math.max(0, dataRows), totalCols - 1)])
+      .build());
+  });
+
+  sh.setConditionalFormatRules(rules);
+
+  // Wrap + vertical align
+  sh.getRange(3, 1, Math.max(0, dataRows), totalCols)
+    .setVerticalAlignment("middle")
+    .setWrap(true);
+
+  // Freeze title + header
+  sh.setFrozenRows(2);
+}
+
 
 Execute the workflow
 
 Output-
 ![Alt text](Section A.png)
-![Alt text]((Section A.png)
-![Alt text](https://example.com/my-image.png)
-![Alt text](https://example.com/my-image.png)
-![Alt text](https://example.com/my-image.png)
-![Alt text](https://example.com/my-image.png)
+![Alt text](Section B.png)
+![Alt text](Section C.png)
+![Alt text](Section D.png)
+![Alt text](Section E.png)
+![Alt text](Section F.png)
 
 
 
