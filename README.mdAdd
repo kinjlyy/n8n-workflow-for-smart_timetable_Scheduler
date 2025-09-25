@@ -1,0 +1,21 @@
+Add timetable data in google sheet
+
+Input-
+
+![Alt text](Input_sheet.png)
+
+Connect the INPUT sheet to n8n via google sheets node
+Connect an output sheet via same proccess
+
+Execute the workflow
+
+Output-
+![Alt text](Section A.png)
+![Alt text]((Section A.png)
+![Alt text](https://example.com/my-image.png)
+![Alt text](https://example.com/my-image.png)
+![Alt text](https://example.com/my-image.png)
+![Alt text](https://example.com/my-image.png)
+
+
+
